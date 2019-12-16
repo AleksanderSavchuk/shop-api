@@ -6,17 +6,18 @@ module Api
 
       def index
         @users = User.all
-        render json: @users, status: :ok
+        @status = 'ok'
       end
 
       def show
-        render json: @user, status: :ok
+        @user
+        @status = 'ok'
       end
 
       def create
         @user = User.new(user_params)
         if @user.save
-          render json: @user, status: :created
+          @status = 'created'
         else
           render json: { errors: @user.errors.full_messages },
                  status: :unprocessable_entity
@@ -32,6 +33,7 @@ module Api
 
       def destroy
         @user.destroy
+        @status = 'destroyed'
       end
 
       private
