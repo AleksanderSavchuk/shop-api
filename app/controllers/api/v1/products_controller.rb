@@ -3,16 +3,19 @@ module Api
     class ProductsController < ApplicationController
       def index
         @products = Product.all
+        authorize @products, :index?
         @status = 'ok'
       end
 
       def show
         @product = Product.find(product_params[:id])
+        authorize @product, :show?
         @status = 'ok'
       end
 
       def create
         @product = Product.new(product_params)
+        authorize @product, :create?
         if @product.save
           @status = 'created'
         else

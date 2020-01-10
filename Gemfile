@@ -12,7 +12,7 @@ gem 'puma', '~> 3.11'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "factory_bot_rails"
+gem 'factory_bot_rails'
 gem 'jbuilder', '~> 2.5'
 # Use Json Web Token (JWT) for token based authentication
 gem 'jwt'
@@ -35,6 +35,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+
+group :test do
+  gem 'pundit-matchers', '~> 1.6.0'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

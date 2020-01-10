@@ -18,17 +18,9 @@ class ProductPolicy < ApplicationPolicy
     user.role? :admin
   end
 
-  def new?
-    user.role? :admin
-  end
-
   def update?
     user.role? :admin
   end
-
-  # def edit?
-    # update?
-  # end
 
   def destroy?
     user.role? :admin

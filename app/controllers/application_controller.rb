@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include Pundit
+
   def not_found
     render json: { error: 'not_found' }
   end
@@ -14,5 +16,11 @@ class ApplicationController < ActionController::API
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end
+  end
+
+  def current_user
+    return unless session[:user_id]
+
+    @current_user ||= User.find(session[:user_id])
   end
 end
