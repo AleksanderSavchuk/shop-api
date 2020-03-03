@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    name: Build
+    runs-on: 16.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: deploy.sh
