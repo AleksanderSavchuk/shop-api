@@ -5,7 +5,7 @@ on: [push]
 jobs:
   deploy:
     name: Deploy
-    runs-on: 16.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -24,4 +24,4 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.KEY }}
           REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USER }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
