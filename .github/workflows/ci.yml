@@ -18,10 +18,4 @@ jobs:
           username: ${{ secrets.username }}
           key: ${{ secrets.key }}
           port: ${{ secrets.port }}
-          script: ls -la
-      # - name: Deploy to Server
-        # uses: easingthemes/ssh-deploy@v2.0.7
-        # env:
-          # SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          # REMOTE_HOST: ${{ secrets.HOST }}
-          # REMOTE_USER: ${{ secrets.USERNAME }}
+          script: bash deploy.sh
