@@ -3,6 +3,8 @@
 require 'swagger_helper'
 
 describe 'Send products API' do
+  # let!(:admin_user) { create :user, :admin_role }
+
   path '/api/v1/products', swagger_doc: SWAGGER_API_V1 do
     get 'Retrieve all products' do
       tags 'Products'
