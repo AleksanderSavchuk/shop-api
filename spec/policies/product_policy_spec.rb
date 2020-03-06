@@ -14,9 +14,7 @@ describe ProductPolicy do
   context 'for a client' do
     let(:user) { create :user, :client }
 
-    # TODO Change later
-    # it { is_expected.to permit_actions(%i[index show]) }
-    it { is_expected.to permit_actions(%i[index show destroy]) }
+    it { is_expected.to permit_actions(%i[index show]) }
     it { is_expected.to forbid_actions(%i[create update destroy]) }
   end
 end
