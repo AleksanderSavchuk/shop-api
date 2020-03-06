@@ -18,4 +18,10 @@ jobs:
           username: ${{ secrets.username }}
           key: ${{ secrets.key }}
           port: ${{ secrets.port }}
-          script: bash deploy.sh
+          script: |
+            cd applications/ruby/current/
+            docker-compose down
+            git pull origin master
+            sudo docker-compose build
+            docker-compose run web rspec
+            # docker-compose up -d 
