@@ -2,7 +2,7 @@ class ApplicationController < ActionController::API
   include Pundit
 
   def not_found
-    render json: { error: 'not_found' } 
+    render json: { error: 'not_found' }
   end
 
   def authorize_request
