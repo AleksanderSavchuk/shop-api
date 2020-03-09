@@ -17,7 +17,20 @@ services:
       - .:/app
     ports:
       - 3000:3000
+    expose:
+      - 80
     depends_on:
       - db
     links:
       - db
+  nginx:
+    image: nginx:latest
+    container_name: production_nginx
+    volumes:
+      - /usr/local/etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /usr/local/etc/nginx/error.log:/etc/nginx/error_log.log
+      - /usr/local/etc/nginx/cache/:/etc/nginx/cache
+      - /private/etc/letsencrypt/:/etc/letsencrypt/
+    ports:
+      - 80:80
+      - 443:443
