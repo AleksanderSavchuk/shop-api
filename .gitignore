@@ -16,6 +16,8 @@
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+/data
+init-letsencrypt.sh
 
 .byebug_history
 
