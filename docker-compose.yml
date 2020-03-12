@@ -23,6 +23,7 @@ services:
       - db
     links:
       - db
+      - nginx
   nginx:
     image: nginx:latest
     container_name: production_nginx
