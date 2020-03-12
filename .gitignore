@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/data/*
 
 # Ignore uploaded files in development
 /storage/*
@@ -19,6 +20,7 @@
 /data
 init-letsencrypt.sh
 
+init-letsencrypt.sh
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
