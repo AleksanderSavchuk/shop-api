@@ -4,7 +4,61 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/auth/login":
+    post:
+      summary: Creates session
+      tags:
+      - Authentication
+      consumes:
+      - application/json
+      parameters:
+      - name: params
+        in: body
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+            password:
+              type: string
+          required:
+          - email
+          - password
+        required: true
+      responses:
+        '200':
+          description: user signed in
+        '401':
+          description: user unauthorized
   "/api/v1/products":
+    post:
+      summary: Creates a product
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      - name: params
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+          required:
+          - name
+          - description
+        required: true
+      responses:
+        '200':
+          description: product created
     get:
       summary: Retrieve all products
       tags:
@@ -28,31 +82,6 @@ paths:
                       type: string
                     description:
                       type: string
-            required:
-            - products
-            - status
-    post:
-      summary: Creates a blog
-      tags:
-      - Products
-      consumes:
-      - application/json
-      parameters:
-      - name: product
-        in: body
-        schema:
-          type: object
-          properties:
-            name:
-              type: string
-            description:
-              type: string
-          required:
-          - name
-          - description
-      responses:
-        '200':
-          description: product created
   "/api/v1/products/{id}":
     get:
       summary: Retrieves a product
@@ -63,7 +92,8 @@ paths:
       parameters:
       - name: id
         in: path
-        type: string
+        schema:
+          type: integer
         required: true
       responses:
         '200':
@@ -79,3 +109,219 @@ paths:
                 type: string
             required:
             - product
+    put:
+      summary: Updates a product
+      tags:
+      - Products
+      produces:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - name: params
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+          required:
+          - name
+          - description
+        required: true
+      responses:
+        '200':
+          description: product updated
+    delete:
+      summary: Deletes a product
+      tags:
+      - Products
+      consumes:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: product deleted
+  "/api/v1/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      consumes:
+      - application/json
+      parameters:
+      - name: params
+        in: body
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
+            password_confirmation:
+              type: string
+          required:
+          - email
+          - username
+          - password
+          - password_confirmation
+        required: true
+      responses:
+        '200':
+          description: user created
+    get:
+      summary: Retrieve all users
+      tags:
+      - Users
+      produces:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: users found
+          schema:
+            type: object
+            properties:
+              users:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    username:
+                      type: string
+                    email:
+                      type: string
+            required:
+            - users
+            - status
+  "/api/v1/users/{id}":
+    get:
+      summary: Retrieves a user
+      tags:
+      - Users
+      produces:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: user found
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              username:
+                type: string
+              email:
+                type: string
+            required:
+            - user
+    put:
+      summary: Updates a user
+      tags:
+      - Users
+      produces:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - name: params
+        in: body
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
+            password_confirmation:
+              type: string
+          required:
+          - email
+          - username
+          - password
+          - password_confirmation
+        required: true
+      responses:
+        '200':
+          description: user updated
+    delete:
+      summary: Deletes a user
+      tags:
+      - Users
+      consumes:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        schema:
+          type: string
+        required: true
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: user deleted
+securityDefinitions:
+  JWT:
+    description: the jwt for API auth
+    type: apiKey
+    name: Authorization
+    in: header

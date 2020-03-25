@@ -23,6 +23,11 @@ module ShopApi
     config.load_defaults 5.2
 
     config.autoload_paths += Dir[Rails.root.join('app', 'policies', '*.rb')]
+    if Rails.env.test?
+      RSpec.configure do |config|
+        config.swagger_dry_run = false
+      end
+    end
 
     config.eager_load_paths << Rails.root.join('lib')
     # Settings in config/environments/* take precedence over those specified here.

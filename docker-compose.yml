@@ -12,6 +12,9 @@ services:
       - 5432:5432
   web:
     build: .
+    # Test stuff
+    # stdin_open: true
+    # tty: true
     command: bash -c "bundle exec rails s -b '0.0.0.0'"
     volumes:
       - .:/app

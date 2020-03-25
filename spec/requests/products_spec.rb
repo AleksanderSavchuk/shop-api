@@ -3,12 +3,35 @@
 require 'swagger_helper'
 
 describe 'Send products API' do
-  # let!(:admin_user) { create :user, :admin_role }
+  let(:user) { create :user, :admin }
+  let(:Authorization) { JsonWebToken.encode(user_id: user.id) }
+
+  path '/api/v1/products', swagger_doc: SWAGGER_API_V1 do
+    post 'Creates a product' do
+      tags 'Products'
+      consumes 'application/json'
+      parameter name: 'Authorization', in: :header, schema: { type: :string }, required: true
+      parameter name: :params, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string },
+          description: { type: :string }
+        },
+        required: %w[name description]
+      }, required: true
+
+      response '200', 'product created' do
+        let(:params) { build :product }
+        run_test!
+      end
+    end
+  end
 
   path '/api/v1/products', swagger_doc: SWAGGER_API_V1 do
     get 'Retrieve all products' do
       tags 'Products'
       produces 'application/json'
+
       response '200', 'products found' do
         schema(
           type: :object,
@@ -24,8 +47,7 @@ describe 'Send products API' do
                 }
               }
             }
-          },
-          required: %w[products status]
+          }
         )
         let!(:products) { create_list :product, 4 }
         run_test!
@@ -33,11 +55,12 @@ describe 'Send products API' do
     end
   end
 
-  path '/api/v1/products/{id}' do
+  path '/api/v1/products/{id}', swagger_doc: SWAGGER_API_V1 do
     get 'Retrieves a product' do
       tags 'Products'
       produces 'application/json'
-      parameter name: :id, in: :path, type: :string
+      parameter name: :id, in: :path, schema: { type: :integer }
+
       response '200', 'product found' do
         schema(
           type: :object,
@@ -48,27 +71,43 @@ describe 'Send products API' do
           },
           required: ['product']
         )
-        let(:id) { Product.create(name: 'Test', description: 'test test').id }
+        let(:id) { create(:product).id }
         run_test!
       end
     end
   end
 
-  path '/api/v1/products' do
-    post 'Creates a blog' do
+  path '/api/v1/products/{id}', swagger_doc: SWAGGER_API_V1 do
+    put 'Updates a product' do
       tags 'Products'
-      consumes 'application/json'
-      parameter name: :product, in: :body, schema: {
+      produces 'application/json'
+      parameter name: 'Authorization', in: :header, schema: { type: :string }, required: true
+      parameter name: :id, in: :path, schema: { type: :integer }
+      parameter name: :params, in: :body, schema: {
         type: :object,
         properties: {
           name: { type: :string },
           description: { type: :string }
         },
         required: %w[name description]
-      }
+      }, required: true
+      response '200', 'product updated' do
+        let(:id) { create(:product).id }
+        let(:description) { 'new desc' }
+        run_test!
+      end
+    end
+  end
 
-      response '200', 'product created' do
-        let(:product) { build :product }
+  path '/api/v1/products/{id}', swagger_doc: SWAGGER_API_V1 do
+    delete 'Deletes a product' do
+      tags 'Products'
+      consumes 'application/json'
+      parameter name: 'Authorization', in: :header, schema: { type: :string }, required: true
+      parameter name: :id, in: :path, schema: { type: :integer }
+
+      response '200', 'product deleted' do
+        let(:id) { create(:product).id }
         run_test!
       end
     end

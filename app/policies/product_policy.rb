@@ -1,17 +1,10 @@
 class ProductPolicy < ApplicationPolicy
-  attr_reader :user, :record
-
-  def initialize(user, record)
-    @user = user
-    @record = record
-  end
-
   def index?
-    user.role?(:admin) || user.role?(:client)
+    true
   end
 
   def show?
-    user.role?(:admin) || user.role?(:client)
+    true
   end
 
   def create?

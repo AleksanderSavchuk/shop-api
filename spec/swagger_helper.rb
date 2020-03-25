@@ -15,7 +15,15 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
-      paths: {}
+      paths: {},
+      securityDefinitions: {
+        JWT: {
+          description: 'the jwt for API auth',
+          type: :apiKey,
+          name: 'Authorization',
+          in: :header
+        }
+      }
     }
   }
 

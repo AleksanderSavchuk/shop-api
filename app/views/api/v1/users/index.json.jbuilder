@@ -1,2 +1,2 @@
-json.users
-json.status
+json.users @users
+json.status @status
