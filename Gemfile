@@ -5,10 +5,14 @@ ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
+
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '>= 3.12.4'
+gem 'aws-sdk-s3', require: false
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
