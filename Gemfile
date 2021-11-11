@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '3.0.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.1'
+gem 'rails', '~> 6.1', '>= 6.1.4.1'
 
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '>= 0.18', '< 2.0'
+gem 'pg', '~> 1.2', '>= 1.2.3'
 # Use Puma as the app server
 gem 'puma', '>= 3.12.4'
 gem 'aws-sdk-s3', require: false
@@ -48,7 +48,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'ffaker'
-  gem 'rspec-rails', '~> 3.9'
+  gem 'rspec-rails'
   gem 'rswag-specs'
 end
 
