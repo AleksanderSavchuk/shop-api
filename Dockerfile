@@ -9,6 +9,7 @@ COPY Gemfile "$APP_PATH/Gemfile"
 COPY Gemfile.lock "$APP_PATH/Gemfile.lock"
 RUN bundle install
 COPY . "$APP_PATH"
+EXPOSE 3000
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# CMD ["rails", "server", "-b", "0.0.0.0"]
