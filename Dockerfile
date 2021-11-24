@@ -2,6 +2,11 @@ FROM ruby:3.0
 
 # ENV vars
 ENV APP_PATH /app
+ENV RAILS_ENV production
+ENV RAKE_ENV production
+ENV RAILS_LOG_TO_STDOUT 1
+ENV RAILS_SERVE_STATIC_FILES enable
+ENV SECRET_KEY_BASE 3e7a500c79ae32fb78e6756f951439ff6898aee1a730c07853e082db9fa869ad5a2e60d22395d1c8d1ebbb7ca9be888626b0b5e65a5cbc7c9f7682fce61f144b
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN gem install bundler
