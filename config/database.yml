@@ -43,6 +43,4 @@ test:
 #
 production:
   <<: *default
-  database: shop-api_production
-  username: shop-api
-  password: <%= ENV['SHOP-API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
