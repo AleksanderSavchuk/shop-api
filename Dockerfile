@@ -4,7 +4,6 @@ FROM ruby:3.0
 ENV APP_PATH /app
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN mkdir "$APP_PATH"
 WORKDIR "$APP_PATH"
 COPY Gemfile "$APP_PATH/Gemfile"
 COPY Gemfile.lock "$APP_PATH/Gemfile.lock"
