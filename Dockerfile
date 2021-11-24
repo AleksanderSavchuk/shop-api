@@ -11,6 +11,7 @@ ENV SECRET_KEY_BASE 3e7a500c79ae32fb78e6756f951439ff6898aee1a730c07853e082db9fa8
 WORKDIR "$APP_PATH"
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+
 RUN gem install bundler
 
 COPY . "$APP_PATH"
@@ -22,7 +23,7 @@ RUN bundle config set without 'development:test'
 RUN bundle config --local build.sassc --disable-march-tune-native
 RUN bundle install --jobs `expr $(cat /proc/cpuinfo | grep -c "cpu cores") - 1` --retry 3
 RUN bundle clean
-RUN bundle exec rails assets:precompile
+# RUN bundle exec rails assets:precompile
 EXPOSE 3000
 
 # Start the main process.
