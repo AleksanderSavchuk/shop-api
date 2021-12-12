@@ -73,6 +73,7 @@ jobs:
         # TODO
         rails db:environment:set RAILS_ENV=test
         bundle exec rails db:create
+        rails active_storage:update
         bundle exec rails db:migrate
         bundle exec rails test
 
