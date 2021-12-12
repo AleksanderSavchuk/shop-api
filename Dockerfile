@@ -1,4 +1,4 @@
-FROM ruby:3.0.2
+FROM ruby:3.0.3
 
 # ENV vars
 ENV APP_PATH /app
