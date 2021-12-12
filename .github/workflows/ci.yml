@@ -38,6 +38,41 @@ jobs:
         with:
           push: true
           tags: alexsavchukds/test_app:latest
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+        # will assign a random free host port
+        - 5432/tcp
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 3.0.2
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 3.0.2
+    - name: Build and test with Rake
+      env:
+        # DATABASE_URL: postgres://postgres:Password1@database-2.c2nyzycvmepg.us-east-2.rds.amazonaws.com:5432/shop_api_db
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+        AWS_REGION: us-east-2
+        AWS_S3_BUCKET: test-shop-api-bucket
+      run: |
+        sudo apt-get -yqq install libpq-dev
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+        bundle exec rails test
+
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
