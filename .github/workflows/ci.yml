@@ -38,7 +38,7 @@ jobs:
         with:
           push: true
           tags: alexsavchukds/test_app:latest
-  test:
+            #test:
     name: Test
     runs-on: ubuntu-latest
     services:
@@ -70,16 +70,13 @@ jobs:
         sudo apt-get -yqq install libpq-dev
         gem install bundler
         bundle install --jobs 4 --retry 3
-        echo 'You are here'
-        # TODO
-        rails db:environment:set RAILS_ENV=test
         bundle exec rails db:create
         rails active_storage:update
         bundle exec rails db:migrate
         bundle exec bin/rails db:environment:set RAILS_ENV=test
         bundle exec rspec
 
-  deploy:
+        # deploy:
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
