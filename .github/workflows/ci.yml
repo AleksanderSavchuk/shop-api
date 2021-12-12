@@ -39,6 +39,7 @@ jobs:
           push: true
           tags: alexsavchukds/test_app:latest
   test:
+    name: Test
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -75,7 +76,7 @@ jobs:
         bundle exec rails db:create
         rails active_storage:update
         bundle exec rails db:migrate
-        bundle exec rspec
+        bundle exec bin/rails db:environment:set RAILS_ENV=test rspec
 
   deploy:
     name: Deploy
