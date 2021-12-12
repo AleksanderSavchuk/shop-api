@@ -5,6 +5,9 @@ require 'rails_helper'
 RSpec.describe Product, type: :model do
   context 'ActiveStorage' do
     let(:product) { create :product }
+    context 'bla' do
+      it { expect(true).to eq false }
+    end
     context 'success' do
       it 'successfully attached photo' do
         expect(product.photo.attached?).to eq false
