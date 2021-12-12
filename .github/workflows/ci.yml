@@ -40,6 +40,7 @@ jobs:
           tags: alexsavchukds/test_app:latest
 
   test:
+    needs: docker
     name: Test
     runs-on: ubuntu-latest
     services:
@@ -77,6 +78,7 @@ jobs:
         bundle exec rspec
 
   deploy:
+    needs: test
     name: Deploy
     runs-on: ubuntu-latest
     environment: production
