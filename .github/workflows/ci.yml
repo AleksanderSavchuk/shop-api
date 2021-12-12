@@ -62,14 +62,16 @@ jobs:
     - name: Build and test with Rake
       env:
         # DATABASE_URL: postgres://postgres:Password1@database-2.c2nyzycvmepg.us-east-2.rds.amazonaws.com:5432/shop_api_db
-        DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
         AWS_REGION: us-east-2
         AWS_S3_BUCKET: test-shop-api-bucket
       run: |
         sudo apt-get -yqq install libpq-dev
         gem install bundler
         bundle install --jobs 4 --retry 3
-        # rails db:environment:set RAILS_ENV=test
+        echo 'You are here'
+        # TODO
+        rails db:environment:set RAILS_ENV=test
         bundle exec rails db:create
         bundle exec rails db:migrate
         bundle exec rails test
