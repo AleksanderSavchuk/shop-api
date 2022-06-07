@@ -104,7 +104,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.3)
       activesupport (>= 5.0.0)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json-schema (2.8.1)
       addressable (>= 2.4)
     jwt (2.3.0)
@@ -127,6 +127,8 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     nokogiri (1.12.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     pg (1.2.3)
     public_suffix (4.0.6)
@@ -219,6 +221,7 @@ PLATFORMS
   aarch64-linux
   arm64-darwin-20
   arm64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   aws-sdk-s3
